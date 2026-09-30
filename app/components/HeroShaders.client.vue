@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Shader, Pixelate, Plasma, SineWave } from 'shaders/vue'
+import { Shader, Pixelate, Plasma, SineWave } from 'shaders/vue';
 </script>
 
 <template>

@@ -5,47 +5,47 @@
     :items="[
       {
         label: 'Starter',
-        to: '#',
+        to: '#'
       },
       {
         label: 'Landing',
         to: '#',
         color: 'primary',
         checked: true,
-        type: 'checkbox',
+        type: 'checkbox'
       },
       {
         label: 'Docs',
-        to: '#',
+        to: '#'
       },
       {
         label: 'SaaS',
-        to: '#',
+        to: '#'
       },
       {
         label: 'Dashboard',
-        to: '#',
+        to: '#'
       },
       {
         label: 'Chat',
-        to: '#',
+        to: '#'
       },
       {
         label: 'Portfolio',
-        to: '#',
+        to: '#'
       },
       {
         label: 'Changelog',
-        to: '#',
+        to: '#'
       },
       {
         label: 'Editor',
-        to: '#',
+        to: '#'
       },
       {
         label: 'Calendar',
-        to: '#',
-      },
+        to: '#'
+      }
     ]"
     :content="{ align: 'start' }"
     :ui="{ content: 'min-w-fit' }"
@@ -61,10 +61,10 @@
       :ui="{
         trailingIcon: [
           'transition-transform duration-200',
-          open ? 'rotate-180' : undefined,
+          open ? 'rotate-180' : undefined
         ]
           .filter(Boolean)
-          .join(' '),
+          .join(' ')
       }"
     />
   </UDropdownMenu>

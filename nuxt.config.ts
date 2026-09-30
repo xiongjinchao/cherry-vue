@@ -1,53 +1,53 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    "@nuxt/eslint",
-    "@nuxt/content",
-    "@nuxt/ui",
-    "@vueuse/nuxt",
-    "motion-v/nuxt",
+    '@nuxt/eslint',
+    '@nuxt/content',
+    '@nuxt/ui',
+    '@vueuse/nuxt',
+    'motion-v/nuxt'
   ],
 
   devtools: {
-    enabled: true,
+    enabled: true
   },
 
-  css: ["~/assets/css/main.css"],
-
-  fonts: {
-    providers: {
-      google: false,
-      googleicons: false,
-    },
-  },
+  css: ['~/assets/css/main.css'],
 
   content: {
     experimental: {
-      sqliteConnector: "native",
-    },
+      sqliteConnector: 'native'
+    }
   },
 
   mdc: {
     highlight: {
-      noApiRoute: false,
-    },
+      noApiRoute: false
+    }
   },
 
-  compatibilityDate: "2026-06-30",
+  compatibilityDate: '2026-06-30',
 
   nitro: {
     prerender: {
       // routes: ["/"],
-      crawlLinks: true,
-    },
+      crawlLinks: true
+    }
   },
 
   eslint: {
     config: {
       stylistic: {
-        commaDangle: "never",
-        braceStyle: "1tbs",
-      },
-    },
+        commaDangle: 'never',
+        braceStyle: '1tbs'
+      }
+    }
   },
+
+  fonts: {
+    providers: {
+      google: false,
+      googleicons: false
+    }
+  }
 });

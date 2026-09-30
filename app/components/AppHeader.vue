@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { motion } from "motion-v";
-import type { VariantType } from "motion-v";
+import { motion } from 'motion-v';
+import type { VariantType } from 'motion-v';
 
 const nuxtApp = useNuxtApp();
 const activeSection = ref<string>();
 
 const items = computed(() => [
   {
-    label: "Features",
-    to: "#features",
+    label: 'Features',
+    to: '#features',
     exactHash: true,
-    active: activeSection.value === "features",
+    active: activeSection.value === 'features'
   },
   {
-    label: "Metrics",
-    to: "#metrics",
+    label: 'Metrics',
+    to: '#metrics',
     exactHash: true,
-    active: activeSection.value === "metrics",
-  },
+    active: activeSection.value === 'metrics'
+  }
 ]);
 
-nuxtApp.hooks.hookOnce("page:loading:end", () => {
+nuxtApp.hooks.hookOnce('page:loading:end', () => {
   const observer = new IntersectionObserver(
     (entries) => {
       const visible = entries.find((e) => e.isIntersecting);
@@ -30,11 +30,11 @@ nuxtApp.hooks.hookOnce("page:loading:end", () => {
         activeSection.value = undefined;
       }
     },
-    { rootMargin: "-50% 0px -50% 0px" },
+    { rootMargin: '-50% 0px -50% 0px' }
   );
 
   document
-    .querySelectorAll("#features, #metrics")
+    .querySelectorAll('#features, #metrics')
     .forEach((el) => observer.observe(el));
 });
 
@@ -45,7 +45,7 @@ const variants: Record<
   normal: {
     rotate: 0,
     y: 0,
-    opacity: 1,
+    opacity: 1
   },
   close: (custom: unknown) => {
     const c = custom as number;
@@ -54,12 +54,12 @@ const variants: Record<
       y: c === 1 ? 6 : c === 3 ? -6 : 0,
       opacity: c === 2 ? 0 : 1,
       transition: {
-        type: "spring",
+        type: 'spring',
         stiffness: 260,
-        damping: 20,
-      },
+        damping: 20
+      }
     };
-  },
+  }
 };
 </script>
 

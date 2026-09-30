@@ -1,37 +1,38 @@
 <script setup lang="ts">
 definePageMeta({
-  colorMode: "dark",
+  colorMode: 'dark'
 });
 
-const { data: page } = await useAsyncData("index", () =>
-  queryCollection("content").first(),
+const { data: page } = await useAsyncData('index', () =>
+  queryCollection('content').first()
 );
 if (!page.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: "Page not found",
-    fatal: true,
+    statusMessage: 'Page not found',
+    fatal: true
   });
 }
 
-const title = "技术博客" || page.value?.seo?.title || page.value?.title;
+// const title = page.value?.seo?.title || page.value?.title;
+const title = '技术博客';
 const description = page.value?.seo?.description || page.value?.description;
 
 useSeoMeta({
   title,
   ogTitle: title,
   description,
-  ogDescription: description,
+  ogDescription: description
 });
 
 const heroTitle = computed(() => {
-  const [primary = "", ...secondaryParts] = (page.value?.title ?? "").split(
-    "\n",
+  const [primary = '', ...secondaryParts] = (page.value?.title ?? '').split(
+    '\n'
   );
 
   return {
     primary,
-    secondary: secondaryParts.join(" ").trim(),
+    secondary: secondaryParts.join(' ').trim()
   };
 });
 
@@ -39,7 +40,7 @@ function enterMotion(delay: number = 0) {
   return {
     initial: { opacity: 0, y: 16 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay },
+    transition: { duration: 0.6, delay }
   };
 }
 
@@ -48,7 +49,7 @@ function scrollMotion(delay: number = 0) {
     initial: { opacity: 0, y: 16 },
     whileInView: { opacity: 1, y: 0 },
     inViewOptions: { once: true, amount: 1 },
-    transition: { duration: 0.6, delay },
+    transition: { duration: 0.6, delay }
   };
 }
 
@@ -57,7 +58,7 @@ function staggerMotion(index: number = 0) {
     initial: { opacity: 0 },
     whileInView: { opacity: 1 },
     inViewOptions: { once: true, amount: 1 },
-    transition: { duration: 0.6, delay: index * 0.08 },
+    transition: { duration: 0.6, delay: index * 0.08 }
   };
 }
 
@@ -76,7 +77,7 @@ const { copy, copied } = useClipboard();
           'sm:text-6xl lg:text-7xl xl:text-[80px] tracking-tighter leading-[1.05]',
         description:
           'mt-5 max-w-xl mx-auto text-base sm:text-lg leading-relaxed text-default',
-        links: 'gap-3',
+        links: 'gap-3'
       }"
     >
       <template #top>
@@ -112,7 +113,7 @@ const { copy, copied } = useClipboard();
             :style="{
               backgroundImage:
                 'linear-gradient(135deg, var(--color-primary-400), var(--color-primary-300), var(--color-primary-200), var(--color-primary-100), var(--color-primary-200), var(--color-primary-300), var(--color-primary-400))',
-              animationDuration: '10s',
+              animationDuration: '10s'
             }"
           >
             {{ heroTitle.secondary }}
@@ -154,7 +155,7 @@ const { copy, copied } = useClipboard();
           :ui="{
             title: 'font-mono uppercase text-xs tracking-[0.12em] text-dimmed',
             logos: 'gap-0',
-            logo: 'text-muted size-6',
+            logo: 'text-muted size-6'
           }"
         />
       </Motion>
@@ -169,7 +170,7 @@ const { copy, copied } = useClipboard();
         headline:
           'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
         title: 'max-w-lg mx-auto',
-        description: 'max-w-md mx-auto text-dimmed',
+        description: 'max-w-md mx-auto text-dimmed'
       }"
     >
       <template #headline>
@@ -208,7 +209,7 @@ const { copy, copied } = useClipboard();
                   'mb-5 flex size-9 justify-center rounded-lg bg-primary/10',
                 title: 'text-sm tracking-tight',
                 description:
-                  'text-sm leading-relaxed sm:line-clamp-2 lg:line-clamp-3 text-dimmed',
+                  'text-sm leading-relaxed sm:line-clamp-2 lg:line-clamp-3 text-dimmed'
               }"
             />
           </Motion>
@@ -225,7 +226,7 @@ const { copy, copied } = useClipboard();
         headline:
           'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
         title: 'max-w-lg mx-auto',
-        description: 'max-w-md mx-auto text-dimmed',
+        description: 'max-w-md mx-auto text-dimmed'
       }"
     >
       <template #headline>
@@ -263,10 +264,10 @@ const { copy, copied } = useClipboard();
                 wrapper: 'items-center',
                 title: [
                   'text-4xl font-bold tracking-tight leading-none',
-                  metric.class,
+                  metric.class
                 ],
                 description:
-                  'font-mono text-xs uppercase tracking-[0.06em] text-dimmed mt-3',
+                  'font-mono text-xs uppercase tracking-[0.06em] text-dimmed mt-3'
               }"
             />
           </Motion>
@@ -281,7 +282,7 @@ const { copy, copied } = useClipboard();
         root: 'py-24 sm:py-32',
         container: 'max-w-3xl text-center',
         title: 'lg:text-5xl tracking-tighter whitespace-pre-line',
-        description: 'mx-auto max-w-sm leading-relaxed text-dimmed',
+        description: 'mx-auto max-w-sm leading-relaxed text-dimmed'
       }"
     >
       <template #top>
