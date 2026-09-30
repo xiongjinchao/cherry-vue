@@ -1,7 +1,7 @@
 // @ts-check
-import withNuxt from './.nuxt/eslint.config.mjs'
-import betterTailwindcss from 'eslint-plugin-better-tailwindcss'
-import { getDefaultAttributes } from 'eslint-plugin-better-tailwindcss/api/defaults'
+import withNuxt from './.nuxt/eslint.config.mjs';
+import betterTailwindcss from 'eslint-plugin-better-tailwindcss';
+import { getDefaultAttributes } from 'eslint-plugin-better-tailwindcss/api/defaults';
 
 export default withNuxt(
   betterTailwindcss.configs['correctness-error'],
@@ -19,6 +19,15 @@ export default withNuxt(
   // 我添加的
   {
     rules: {
+      'vue/max-attributes-per-line': ['error', {
+        singleline: {
+          max: 5
+        },
+        multiline: {
+          max: 1
+        }
+      }],
+      '@stylistic/arrow-parens': ['error', 'always'],
       '@stylistic/quotes': ['error', 'single'],
       '@stylistic/quote-props': ['error', 'as-needed'],
       '@stylistic/semi': ['error', 'always'],
@@ -29,4 +38,4 @@ export default withNuxt(
       '@stylistic/comma-dangle': ['error', 'never']
     }
   }
-)
+);
