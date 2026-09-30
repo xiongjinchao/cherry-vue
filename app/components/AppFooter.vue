@@ -1,23 +1,29 @@
 <script setup lang="ts">
 const links = [
-  { label: 'Docs', to: 'https://ui.nuxt.com', target: '_blank' },
-  { label: 'GitHub', to: 'https://github.com/nuxt/ui', target: '_blank' },
-  { label: 'Twitter', to: 'https://twitter.com/nuxt_js', target: '_blank' },
-  { label: 'Status', to: '#' },
-  { label: 'Privacy', to: '#' }
-]
+  { label: "Docs", to: "#", target: "_blank" },
+  { label: "GitHub", to: "#", target: "_blank" },
+  { label: "Twitter", to: "#", target: "_blank" },
+  { label: "Status", to: "#" },
+  { label: "Privacy", to: "#" },
+];
 </script>
 
 <template>
   <UFooter
     :ui="{
       container: 'border-t border-default lg:py-8',
-      right: 'gap-x-0 flex-wrap'
+      right: 'gap-x-0 flex-wrap',
     }"
   >
     <template #left>
       <p class="text-sm text-dimmed">
         Built with Nuxt UI • © {{ new Date().getFullYear() }}
+        <a
+          class="text-sm text-dimmed ml-2"
+          href="https://beian.miit.gov.cn/#/Integrated/index"
+        >
+          冀ICP备19030464号-1
+        </a>
       </p>
     </template>
 

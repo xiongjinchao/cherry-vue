@@ -1,38 +1,46 @@
 <script setup lang="ts">
 definePageMeta({
-  colorMode: 'dark'
-})
+  colorMode: "dark",
+});
 
-const { data: page } = await useAsyncData('index', () => queryCollection('content').first())
+const { data: page } = await useAsyncData("index", () =>
+  queryCollection("content").first(),
+);
 if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page not found",
+    fatal: true,
+  });
 }
 
-const title = page.value?.seo?.title || page.value?.title
-const description = page.value?.seo?.description || page.value?.description
+const title = "技术博客" || page.value?.seo?.title || page.value?.title;
+const description = page.value?.seo?.description || page.value?.description;
 
 useSeoMeta({
   title,
   ogTitle: title,
   description,
-  ogDescription: description
-})
+  ogDescription: description,
+});
 
 const heroTitle = computed(() => {
-  const [primary = '', ...secondaryParts] = (page.value?.title ?? '').split('\n')
+  const [primary = "", ...secondaryParts] = (page.value?.title ?? "").split(
+    "\n",
+  );
 
   return {
     primary,
-    secondary: secondaryParts.join(' ').trim()
-  }
-})
+    secondary: secondaryParts.join(" ").trim(),
+  };
+});
 
 function enterMotion(delay: number = 0) {
   return {
     initial: { opacity: 0, y: 16 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay }
-  }
+    transition: { duration: 0.6, delay },
+  };
 }
 
 function scrollMotion(delay: number = 0) {
@@ -40,8 +48,8 @@ function scrollMotion(delay: number = 0) {
     initial: { opacity: 0, y: 16 },
     whileInView: { opacity: 1, y: 0 },
     inViewOptions: { once: true, amount: 1 },
-    transition: { duration: 0.6, delay }
-  }
+    transition: { duration: 0.6, delay },
+  };
 }
 
 function staggerMotion(index: number = 0) {
@@ -49,11 +57,11 @@ function staggerMotion(index: number = 0) {
     initial: { opacity: 0 },
     whileInView: { opacity: 1 },
     inViewOptions: { once: true, amount: 1 },
-    transition: { duration: 0.6, delay: index * 0.08 }
-  }
+    transition: { duration: 0.6, delay: index * 0.08 },
+  };
 }
 
-const { copy, copied } = useClipboard()
+const { copy, copied } = useClipboard();
 </script>
 
 <template>
@@ -64,9 +72,11 @@ const { copy, copied } = useClipboard()
         root: 'pb-24 sm:pb-32',
         container: 'relative z-10 lg:py-32',
         wrapper: 'flex flex-col items-center',
-        title: 'sm:text-6xl lg:text-7xl xl:text-[80px] tracking-tighter leading-[1.05]',
-        description: 'mt-5 max-w-xl mx-auto text-base sm:text-lg leading-relaxed text-default',
-        links: 'gap-3'
+        title:
+          'sm:text-6xl lg:text-7xl xl:text-[80px] tracking-tighter leading-[1.05]',
+        description:
+          'mt-5 max-w-xl mx-auto text-base sm:text-lg leading-relaxed text-default',
+        links: 'gap-3',
       }"
     >
       <template #top>
@@ -86,30 +96,23 @@ const { copy, copied } = useClipboard()
             class="rounded-full px-3 py-1.5 gap-1.5 bg-white/5 backdrop-blur-sm"
           >
             <template #leading>
-              <UChip
-                inset
-                standalone
-                :ui="{ base: 'animate-pulse ring-0' }"
-              />
+              <UChip inset standalone :ui="{ base: 'animate-pulse ring-0' }" />
             </template>
           </UBadge>
         </Motion>
       </template>
 
       <template #title>
-        <Motion
-          as="span"
-          v-bind="enterMotion(0.35)"
-          class="inline-block"
-        >
+        <Motion as="span" v-bind="enterMotion(0.35)" class="inline-block">
           {{ heroTitle.primary }}
-          <br v-if="heroTitle.secondary">
+          <br v-if="heroTitle.secondary" />
           <span
             v-if="heroTitle.secondary"
             class="animate-shimmer bg-size-[200%_auto] bg-clip-text text-transparent"
             :style="{
-              backgroundImage: 'linear-gradient(135deg, var(--color-primary-400), var(--color-primary-300), var(--color-primary-200), var(--color-primary-100), var(--color-primary-200), var(--color-primary-300), var(--color-primary-400))',
-              animationDuration: '10s'
+              backgroundImage:
+                'linear-gradient(135deg, var(--color-primary-400), var(--color-primary-300), var(--color-primary-200), var(--color-primary-100), var(--color-primary-200), var(--color-primary-300), var(--color-primary-400))',
+              animationDuration: '10s',
             }"
           >
             {{ heroTitle.secondary }}
@@ -118,11 +121,7 @@ const { copy, copied } = useClipboard()
       </template>
 
       <template #description>
-        <Motion
-          as="span"
-          v-bind="enterMotion(0.5)"
-          class="inline-block"
-        >
+        <Motion as="span" v-bind="enterMotion(0.5)" class="inline-block">
           {{ page.description }}
         </Motion>
       </template>
@@ -148,17 +147,14 @@ const { copy, copied } = useClipboard()
         <HeroTerminal :lines="page.terminal.lines" />
       </Motion>
 
-      <Motion
-        class="max-w-lg mx-auto w-full"
-        v-bind="scrollMotion(0.95)"
-      >
+      <Motion class="max-w-lg mx-auto w-full" v-bind="scrollMotion(0.95)">
         <UPageLogos
           :title="page.logos.title"
           :items="page.logos.items"
           :ui="{
             title: 'font-mono uppercase text-xs tracking-[0.12em] text-dimmed',
             logos: 'gap-0',
-            logo: 'text-muted size-6'
+            logo: 'text-muted size-6',
           }"
         />
       </Motion>
@@ -170,37 +166,26 @@ const { copy, copied } = useClipboard()
       :ui="{
         root: 'py-24 sm:py-32 scroll-mt-(--ui-header-height)',
         container: 'max-w-5xl',
-        headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
+        headline:
+          'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
         title: 'max-w-lg mx-auto',
-        description: 'max-w-md mx-auto text-dimmed'
+        description: 'max-w-md mx-auto text-dimmed',
       }"
     >
       <template #headline>
-        <Motion
-          as="span"
-          v-bind="scrollMotion()"
-          class="inline-block"
-        >
+        <Motion as="span" v-bind="scrollMotion()" class="inline-block">
           {{ page.features.headline }}
         </Motion>
       </template>
 
       <template #title>
-        <Motion
-          as="span"
-          v-bind="scrollMotion(0.1)"
-          class="inline-block"
-        >
+        <Motion as="span" v-bind="scrollMotion(0.1)" class="inline-block">
           {{ page.features.title }}
         </Motion>
       </template>
 
       <template #description>
-        <Motion
-          as="span"
-          v-bind="scrollMotion(0.2)"
-          class="inline-block"
-        >
+        <Motion as="span" v-bind="scrollMotion(0.2)" class="inline-block">
           {{ page.features.description }}
         </Motion>
       </template>
@@ -219,9 +204,11 @@ const { copy, copied } = useClipboard()
               class="rounded-none duration-300"
               to="#"
               :ui="{
-                leading: 'mb-5 flex size-9 justify-center rounded-lg bg-primary/10',
+                leading:
+                  'mb-5 flex size-9 justify-center rounded-lg bg-primary/10',
                 title: 'text-sm tracking-tight',
-                description: 'text-sm leading-relaxed sm:line-clamp-2 lg:line-clamp-3 text-dimmed'
+                description:
+                  'text-sm leading-relaxed sm:line-clamp-2 lg:line-clamp-3 text-dimmed',
               }"
             />
           </Motion>
@@ -235,37 +222,26 @@ const { copy, copied } = useClipboard()
       :ui="{
         root: 'py-24 sm:py-32 scroll-mt-(--ui-header-height)',
         container: 'max-w-5xl',
-        headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
+        headline:
+          'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
         title: 'max-w-lg mx-auto',
-        description: 'max-w-md mx-auto text-dimmed'
+        description: 'max-w-md mx-auto text-dimmed',
       }"
     >
       <template #headline>
-        <Motion
-          as="span"
-          v-bind="scrollMotion()"
-          class="inline-block"
-        >
+        <Motion as="span" v-bind="scrollMotion()" class="inline-block">
           {{ page.metrics.headline }}
         </Motion>
       </template>
 
       <template #title>
-        <Motion
-          as="span"
-          v-bind="scrollMotion(0.1)"
-          class="inline-block"
-        >
+        <Motion as="span" v-bind="scrollMotion(0.1)" class="inline-block">
           {{ page.metrics.title }}
         </Motion>
       </template>
 
       <template #description>
-        <Motion
-          as="span"
-          v-bind="scrollMotion(0.2)"
-          class="inline-block"
-        >
+        <Motion as="span" v-bind="scrollMotion(0.2)" class="inline-block">
           {{ page.metrics.description }}
         </Motion>
       </template>
@@ -285,8 +261,12 @@ const { copy, copied } = useClipboard()
               :ui="{
                 root: 'text-center',
                 wrapper: 'items-center',
-                title: ['text-4xl font-bold tracking-tight leading-none', metric.class],
-                description: 'font-mono text-xs uppercase tracking-[0.06em] text-dimmed mt-3'
+                title: [
+                  'text-4xl font-bold tracking-tight leading-none',
+                  metric.class,
+                ],
+                description:
+                  'font-mono text-xs uppercase tracking-[0.06em] text-dimmed mt-3',
               }"
             />
           </Motion>
@@ -301,7 +281,7 @@ const { copy, copied } = useClipboard()
         root: 'py-24 sm:py-32',
         container: 'max-w-3xl text-center',
         title: 'lg:text-5xl tracking-tighter whitespace-pre-line',
-        description: 'mx-auto max-w-sm leading-relaxed text-dimmed'
+        description: 'mx-auto max-w-sm leading-relaxed text-dimmed',
       }"
     >
       <template #top>
@@ -309,21 +289,13 @@ const { copy, copied } = useClipboard()
       </template>
 
       <template #title>
-        <Motion
-          as="span"
-          v-bind="scrollMotion()"
-          class="inline-block"
-        >
+        <Motion as="span" v-bind="scrollMotion()" class="inline-block">
           {{ page.cta.title }}
         </Motion>
       </template>
 
       <template #description>
-        <Motion
-          as="span"
-          v-bind="scrollMotion(0.1)"
-          class="inline-block"
-        >
+        <Motion as="span" v-bind="scrollMotion(0.1)" class="inline-block">
           {{ page.cta.description }}
         </Motion>
       </template>
