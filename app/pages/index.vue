@@ -15,7 +15,7 @@ if (!page.value) {
 }
 
 // const title = page.value?.seo?.title || page.value?.title;
-const title = '技术博客';
+const title = '技术笔记';
 const description = page.value?.seo?.description || page.value?.description;
 
 useSeoMeta({
